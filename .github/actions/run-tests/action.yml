@@ -28,6 +28,9 @@ inputs:
   redis-py-ref:
     description: 'Checkout redis-py specific ref'
     required: false
+  client-libs-test-image-tag:
+    description: 'Client libs test image tag'
+    required: false
 runs:
   using: "composite"
   steps:
@@ -52,7 +55,7 @@ runs:
     - name: Setup Test environment
       env:
         REDIS_VERSION: ${{ inputs.redis-version }}
-        CLIENT_LIBS_TEST_IMAGE_TAG: ${{ inputs.redis-version }}
+        CLIENT_LIBS_TEST_IMAGE_TAG: ${{ inputs.client-libs-test-image-tag || inputs.redis-version }}
       run: |
         set -e
 
